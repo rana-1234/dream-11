@@ -1,0 +1,86 @@
+{
+  "keepers" : ["H Klassen", "W Saha"],
+  "batters" : ["S Giil", "S Sudh", "A Sharma", "T Head"],
+  "rounders": ["A Omzari", "A Mark"],
+  "bowlers" : ["M Sharma", "R khan", "U Yadav", "B Kumar", "J Unadkat", "P Cummins"],
+  "teamRequired": 10,
+  "maxCaptain": 1,
+  "maxViceCaptain": 2,
+  "keeperCanAppearInTeamMaxCount": 7,
+  "batterCanAppearInTeamMaxCount": 7,
+  "rounderCanAppearInTeamMaxCount":6,
+  "bowlerCanAppearInTeamMaxCount": 6,
+  "formats": [
+    {
+      "comments": "2,4,2,3",
+      "requiredCount":1,
+      "format": {
+        "keeper": 2,
+        "batter": 4,
+        "rounder":2,
+        "bowler": 3
+      }
+    },
+    {
+      "comments": "2,3,3,4",
+      "requiredCount":1,
+      "format": {
+        "keeper": 2,
+        "batter": 3,
+        "rounder":2,
+        "bowler": 4
+      }
+    },
+    {
+      "comments": "1,3,1,6",
+      "requiredCount":1,
+      "format": {
+        "keeper": 1,
+        "batter": 3,
+        "rounder":1,
+        "bowler": 6
+      }
+    },
+    {
+      "comments": "1,4,1,5",
+      "requiredCount":1,
+      "format": {
+        "keeper": 1,
+        "batter": 4,
+        "rounder":1,
+        "bowler": 5
+      }
+    },
+    {
+      "comments": "1,4,3,3",
+      "requiredCount":1,
+      "format": {
+        "keeper": 1,
+        "batter": 4,
+        "rounder":2,
+        "bowler": 4
+      }
+    },
+    {
+      "comments": "1,3,4,3",
+      "requiredCount":1,
+      "format": {
+        "keeper": 2,
+        "batter": 2,
+        "rounder":2,
+        "bowler": 5
+      }
+    },
+    {
+      "comments": "1,5,3,2",
+      "requiredCount":1,
+      "format": {
+        "keeper": 1,
+        "batter": 4,
+        "rounder":2,
+        "bowler": 4
+      }
+    }
+  ]
+
+}
