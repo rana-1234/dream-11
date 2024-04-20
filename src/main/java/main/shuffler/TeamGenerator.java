@@ -1,6 +1,7 @@
 package main.shuffler;
 
 import com.google.common.base.Strings;
+import org.json.JSONString;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -9,6 +10,7 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class TeamGenerator {
 
@@ -18,13 +20,15 @@ public class TeamGenerator {
     public static Set<String> batterSet = new HashSet<String>();
     public static Set<String> rounderSet = new HashSet<String>();
     public static Set<String> bowlerSet = new HashSet<String>();
+
+    public static Set<String> captainsCantBeFrom = new HashSet<String>();
     public static Map<String, Integer> captainCount = new HashMap<>();
     public static Map<String, Integer> viceCaptainCount = new HashMap<>();
     public static Map<String, Integer> totalCount = new HashMap<>();
 
-    public static int MAX_CAPTAIN_COUNT = 2;
-    public static int MAX_VICE_CAPTAIN_COUNT = 2;
-    public static int MAX_TOTAL_COUNT_FOR_CAPTAIN_AND_VICE_CAPTAIN = 3;
+    public static Long MAX_CAPTAIN_COUNT = 2L;
+    public static Long MAX_VICE_CAPTAIN_COUNT = 2L;
+    public static Long MAX_TOTAL_COUNT_FOR_CAPTAIN_AND_VICE_CAPTAIN = 3L;
 
     static void printAllContainers(){
         System.out.println("Printing captaincy containers...");
@@ -43,11 +47,32 @@ public class TeamGenerator {
 
     public static String encodeTeam(List<String> team){
         StringBuilder sb = new StringBuilder();
-        Collections.sort(team);
-        for(String st : team){
+        List<String> sortedTeam = team.stream().sorted().collect(Collectors.toList());
+        for(String st : sortedTeam){
             sb.append(st);
         }
         return sb.toString();
+    }
+
+    public static int readComments() throws IOException, ParseException{
+        JSONParser jsonParser = new JSONParser();
+        Object obj = jsonParser.parse(new FileReader("/Users/shashibhushanrana/IdeaProjects/dream-11/src/main/resources/team_input.json"));
+        JSONObject jsonObject = (JSONObject)  obj;
+        String commentString =  jsonObject.get("Comments").toString();
+
+        int repeatTill = 0;
+        for (int i = 0 ; i < commentString.length(); i++){
+            repeatTill += commentString.charAt(i);
+        }
+
+        MAX_CAPTAIN_COUNT = (Long) jsonObject.get("max_captain_count");
+        MAX_CAPTAIN_COUNT = (Long) jsonObject.get("max_vice_captain_count");
+        MAX_TOTAL_COUNT_FOR_CAPTAIN_AND_VICE_CAPTAIN = (Long) jsonObject.get("max_total_count");
+
+        JSONArray capAndViceCapNotFrom = (JSONArray)jsonObject.get("captains_not_from");
+        capAndViceCapNotFrom.forEach(player -> captainsCantBeFrom.add(player.toString()));
+
+        return repeatTill;
     }
 
     public static List<String> readPlayers() throws IOException, ParseException {
@@ -78,90 +103,112 @@ public class TeamGenerator {
 
 
     public static void main(String[] args) throws Exception {
-        List<String> players = readPlayers();
 
-        // Maintain at least 13 players for 20 teams
-
-        int teamCount = 20;
+        int prabhuKaNamLekarTeamBanRahaH = readComments();
         List<List<String>> teams = new ArrayList<>();
-        Set<String> alreadyTakenTeam = new HashSet<>();
+        List<String> players = readPlayers();
+        int teamCount = 20;
+        int maxTryCount = 1000005;
+        List<List<String>> previousTeams = new ArrayList<>();
 
-        for(int i = 0 ; i < teamCount; i++){
-            for(int j = 0 ; j < random.nextInt()%99 + 1 ; j++) {
-                Collections.shuffle(players);
+        while(prabhuKaNamLekarTeamBanRahaH-- >= 1 && maxTryCount > 0 ) {
+            teams = new ArrayList<>();
+            captainCount = new HashMap<>();
+            viceCaptainCount = new HashMap<>();
+            totalCount = new HashMap<>();
+
+            // Maintain at least 13 players for 20 teams
+            Set<String> alreadyTakenTeam = new HashSet<>();
+            for (int i = 0; i < teamCount && maxTryCount > 0; i++) {
+                for (int j = 0; j < random.nextInt() % 99 + 1; j++) {
+                    Collections.shuffle(players);
+                }
+
+                List<String> currentTeam = new ArrayList<>();
+                int oneTeamSize = 11;
+
+                List<String> checker = new ArrayList<>();
+                boolean atLeastOneKeeper = false;
+                boolean atLeastOneBatter = false;
+                boolean atLeastOneRounder = false;
+                boolean atLeastOneBowler = false;
+
+                for (int j = 0; j < oneTeamSize; j++) {
+                    String player = players.get(j);
+                    if (keeperSet.contains(player)) {
+                        atLeastOneKeeper = true;
+                    }
+                    if (batterSet.contains(player)) {
+                        atLeastOneBatter = true;
+                    }
+                    if (rounderSet.contains(player)) {
+                        atLeastOneRounder = true;
+                    }
+
+                    if (bowlerSet.contains(player)) {
+                        atLeastOneBowler = true;
+                    }
+                    checker.add(player);
+                }
+
+                int captain = (random.nextInt() % 11 + 11) % 11;
+                while(captainsCantBeFrom.contains(checker.get(captain))) {
+                    captain = (random.nextInt() % 11 + 11) % 11;
+                }
+
+                int viceCaptain = captain;
+                while (viceCaptain == captain || captainsCantBeFrom.contains(checker.get(viceCaptain))) {
+                    viceCaptain = (random.nextInt() % 11 + 11) % 11;
+                }
+
+                if (alreadyTakenTeam.contains(encodeTeam(checker)) ||
+                        !atLeastOneKeeper ||
+                        !atLeastOneBatter ||
+                        !atLeastOneRounder ||
+                        !atLeastOneBowler ||
+                        (captainCount.getOrDefault(checker.get(captain), 0) + 1 > MAX_CAPTAIN_COUNT) ||
+                        (viceCaptainCount.getOrDefault(checker.get(viceCaptain), 0) + 1 > MAX_VICE_CAPTAIN_COUNT) ||
+                        (totalCount.getOrDefault(checker.get(viceCaptain), 0) + 1 > MAX_TOTAL_COUNT_FOR_CAPTAIN_AND_VICE_CAPTAIN) ||
+                        (totalCount.getOrDefault(checker.get(captain), 0) + 1 > MAX_TOTAL_COUNT_FOR_CAPTAIN_AND_VICE_CAPTAIN)
+                ) {
+//                    System.out.println("Already taken team........");
+                    maxTryCount--;
+                    i--;
+                    continue;
+                }
+
+
+                alreadyTakenTeam.add(encodeTeam(checker));
+                captainCount.put(checker.get(captain), captainCount.getOrDefault(checker.get(captain), 0) + 1);
+                totalCount.put(checker.get(captain), totalCount.getOrDefault(checker.get(captain), 0) + 1);
+
+                viceCaptainCount.put(checker.get(viceCaptain), viceCaptainCount.getOrDefault(checker.get(viceCaptain), 0) + 1);
+                totalCount.put(checker.get(viceCaptain), totalCount.getOrDefault(checker.get(viceCaptain), 0) + 1);
+
+
+                for (int j = 0; j < oneTeamSize; j++) {
+                    String player = checker.get(j);
+                    if (j == captain) {
+                        player = "C-" + player;
+                    } else if (j == viceCaptain) {
+                        player = "VC-" + player;
+                    }
+                    currentTeam.add(player);
+                }
+//                System.out.println("Generated now...");
+                teams.add(currentTeam);
             }
 
-            int captain = (random.nextInt()%11 + 11)%11;
-            int viceCaptain = captain;
-            while(viceCaptain == captain) {
-                viceCaptain = (random.nextInt()%11 + 11)%11;
+            if( teams.size() == teamCount) {
+                previousTeams = teams.stream().collect(Collectors.toList());
             }
-
-            List<String> currentTeam = new ArrayList<>();
-            int oneTeamSize = 11;
-
-            List<String> checker = new ArrayList<>();
-            boolean atLeastOneKeeper = false;
-            boolean atLeastOneBatter = false;
-            boolean atLeastOneRounder = false;
-            boolean atLeastOneBowler = false;
-
-            for(int j = 0 ; j < oneTeamSize ; j++){
-                String player = players.get(j);
-                if( keeperSet.contains(player) ){
-                    atLeastOneKeeper = true;
-                }
-                if ( batterSet.contains(player) ){
-                    atLeastOneBatter = true;
-                }
-                if( rounderSet.contains(player)){
-                    atLeastOneRounder = true;
-                }
-
-                if( bowlerSet.contains(player) ){
-                    atLeastOneBowler = true;
-                }
-                checker.add(player);
-            }
-
-            if( alreadyTakenTeam.contains(encodeTeam(checker)) ||
-                    !atLeastOneKeeper ||
-                    !atLeastOneBatter ||
-                    !atLeastOneRounder ||
-                    !atLeastOneBowler ||
-                    (captainCount.getOrDefault(checker.get(captain), 0) + 1 > MAX_CAPTAIN_COUNT) ||
-                    (viceCaptainCount.getOrDefault(checker.get(viceCaptain), 0) + 1 > MAX_VICE_CAPTAIN_COUNT) ||
-                    (totalCount.getOrDefault(checker.get(viceCaptain), 0) + 1 > MAX_TOTAL_COUNT_FOR_CAPTAIN_AND_VICE_CAPTAIN) ||
-                    (totalCount.getOrDefault(checker.get(captain), 0) + 1 > MAX_TOTAL_COUNT_FOR_CAPTAIN_AND_VICE_CAPTAIN)
-            ){
-                System.out.println("Already taken team........");
-                i--;
-                continue;
-            }
-
-
-            alreadyTakenTeam.add(encodeTeam(checker));
-            captainCount.put(checker.get(captain), captainCount.getOrDefault(checker.get(captain), 0) + 1);
-            totalCount.put(checker.get(captain), totalCount.getOrDefault(checker.get(captain), 0) + 1);
-
-            viceCaptainCount.put(checker.get(viceCaptain),viceCaptainCount.getOrDefault(checker.get(viceCaptain), 0) + 1);
-            totalCount.put(checker.get(viceCaptain), totalCount.getOrDefault(checker.get(viceCaptain), 0) + 1);
-
-
-            for(int j = 0 ; j < oneTeamSize ; j++){
-                String player = checker.get(j);
-                if ( j == captain){
-                    player = "C-" + player;
-                }
-                else if ( j == viceCaptain){
-                    player = "VC-" + player;
-                }
-                currentTeam.add(player);
-            }
-
-            teams.add(currentTeam);
         }
-        showDreamTeam(teams);
+        if (previousTeams.isEmpty()) {
+            System.out.println("Couldn't create teams from given constraints...");
+        }
+        else {
+            showDreamTeam(previousTeams);
+        }
     }
 
     private static void showDreamTeam(List<List<String>> dtList) {

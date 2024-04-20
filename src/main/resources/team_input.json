@@ -1,7 +1,13 @@
 {
-  "Comments": "Jai Shree RAM",
-  "keepers": ["L Rahul","Q Dekock","N Pooran"],
-  "batters": ["A Rahane", "R Gaikwad", "A Badoni", "D Mitchell", "S Dube"],
-  "rounders": ["R Jadeja","K Pandya", "M Stonis"],
-  "bowlers": ["M Pathirana","T Deshpande","M Khan","M Rahman","Y Thakur"]
+  "Comments": "never settle",
+  "keepers": ["R Pant", "H Klassen"],
+  "batters": ["J Fraser","A Sharma","P Shaw","T Head","T Stubs"],
+  "rounders": ["A Patel","K Nitesh","S Ahmed"],
+  "bowlers": ["K Yadav","K Ahmed","J Unadkat","M Kumar","P Cummins"],
+  "captains_not_from": ["S Ahmed","J Unadkat", "A Patel","K Ahmed", "T Stubs"],
+  "max_captain_count": 2,
+  "max_vice_captain_count":2,
+  "max_total_count": 4,
+  "comment_dc": [],
+  "comment_srh": []
 }

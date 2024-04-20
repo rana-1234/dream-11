@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c8b29a13-8d28-4fb4-ab48-81345dc61dc8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/main/shuffler/TeamGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/team_input.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/shuffler/TeamGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/shuffler/TeamGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/team_input.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/team_input.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,11 +116,19 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/main/shuffler/TeamGenerator.java</url>
-          <line>164</line>
-          <option name="timeStamp" value="24" />
+          <line>188</line>
+          <option name="timeStamp" value="33" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="checker.get(viceCaptain)" language="JAVA" />
+        <watch expression="checker.get(captain)" language="JAVA" />
+        <watch expression="captain" language="JAVA" />
+        <watch expression="viceCaptain" language="JAVA" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
