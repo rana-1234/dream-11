@@ -115,7 +115,7 @@ public class TeamGenerator {
         List<List<String>> teams = new ArrayList<>();
         List<String> players = readPlayers();
         long teamCount = TOTAL_TEAM_REQUIRED;
-        int maxTryCount = 1000005;
+        int maxTryCount = 10000005;
         List<List<String>> previousTeams = new ArrayList<>();
 
         while(prabhuKaNamLekarTeamBanRahaH-- >= 1 && maxTryCount > 0 ) {
@@ -127,10 +127,7 @@ public class TeamGenerator {
             // Maintain at least 13 players for 20 teams
             Set<String> alreadyTakenTeam = new HashSet<>();
             for (int i = 0; i < teamCount && maxTryCount > 0; i++) {
-                for (int j = 0; j < random.nextInt() % 99 + 1; j++) {
-                    Collections.shuffle(players);
-                }
-
+                Collections.shuffle(players);
                 List<String> currentTeam = new ArrayList<>();
                 int oneTeamSize = 11;
 
