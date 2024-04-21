@@ -1,13 +1,15 @@
 {
   "Comments": "never settle",
-  "keepers": ["R Pant", "H Klassen"],
-  "batters": ["J Fraser","A Sharma","P Shaw","T Head","T Stubs"],
-  "rounders": ["A Patel","K Nitesh","S Ahmed"],
-  "bowlers": ["K Yadav","K Ahmed","J Unadkat","M Kumar","P Cummins"],
-  "captains_not_from": ["S Ahmed","J Unadkat", "A Patel","K Ahmed", "T Stubs"],
-  "max_captain_count": 2,
+  "keepers": ["P Salt", "D Karthik"],
+  "batters": ["V Kohli","S Iyer", "F du plessis", "A Raghuvansi", "R Patider"],
+  "rounders":["A Russell", "W Jack", "S Narine"],
+  "bowlers": ["L Fuckerson", "H Rana", "M Starc", "R Topeley", "V Arrora"],
+  "captains_not_from": ["H Rana","M Starc","V Arrora","R Patider", "W Jack", "D Karthik", "L Fuckerson","R Topeley", "A Raghuvansi"],
+  "vice_captains_not_from": ["H Rana","V Arrora", "W Jack"],
+  "max_captain_count": 3,
   "max_vice_captain_count":2,
   "max_total_count": 4,
+  "total_teams_required": 20,
   "comment_dc": [],
   "comment_srh": []
 }

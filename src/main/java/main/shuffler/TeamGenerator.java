@@ -22,6 +22,7 @@ public class TeamGenerator {
     public static Set<String> bowlerSet = new HashSet<String>();
 
     public static Set<String> captainsCantBeFrom = new HashSet<String>();
+    public static Set<String> viceCaptainCantBeFrom = new HashSet<String>();
     public static Map<String, Integer> captainCount = new HashMap<>();
     public static Map<String, Integer> viceCaptainCount = new HashMap<>();
     public static Map<String, Integer> totalCount = new HashMap<>();
@@ -29,6 +30,8 @@ public class TeamGenerator {
     public static Long MAX_CAPTAIN_COUNT = 2L;
     public static Long MAX_VICE_CAPTAIN_COUNT = 2L;
     public static Long MAX_TOTAL_COUNT_FOR_CAPTAIN_AND_VICE_CAPTAIN = 3L;
+
+    public static Long TOTAL_TEAM_REQUIRED = 20L;
 
     static void printAllContainers(){
         System.out.println("Printing captaincy containers...");
@@ -68,9 +71,13 @@ public class TeamGenerator {
         MAX_CAPTAIN_COUNT = (Long) jsonObject.get("max_captain_count");
         MAX_CAPTAIN_COUNT = (Long) jsonObject.get("max_vice_captain_count");
         MAX_TOTAL_COUNT_FOR_CAPTAIN_AND_VICE_CAPTAIN = (Long) jsonObject.get("max_total_count");
+        TOTAL_TEAM_REQUIRED = (Long) jsonObject.get("total_teams_required");
 
-        JSONArray capAndViceCapNotFrom = (JSONArray)jsonObject.get("captains_not_from");
-        capAndViceCapNotFrom.forEach(player -> captainsCantBeFrom.add(player.toString()));
+        JSONArray capNotFrom = (JSONArray)jsonObject.get("captains_not_from");
+        capNotFrom.forEach(player -> captainsCantBeFrom.add(player.toString()));
+
+        JSONArray viceCapNotFrom = (JSONArray)jsonObject.get("vice_captains_not_from");
+        viceCapNotFrom.forEach(player -> viceCaptainCantBeFrom.add(player.toString()));
 
         return repeatTill;
     }
@@ -107,7 +114,7 @@ public class TeamGenerator {
         int prabhuKaNamLekarTeamBanRahaH = readComments();
         List<List<String>> teams = new ArrayList<>();
         List<String> players = readPlayers();
-        int teamCount = 20;
+        long teamCount = TOTAL_TEAM_REQUIRED;
         int maxTryCount = 1000005;
         List<List<String>> previousTeams = new ArrayList<>();
 
@@ -157,7 +164,7 @@ public class TeamGenerator {
                 }
 
                 int viceCaptain = captain;
-                while (viceCaptain == captain || captainsCantBeFrom.contains(checker.get(viceCaptain))) {
+                while (viceCaptain == captain || viceCaptainCantBeFrom.contains(checker.get(viceCaptain))) {
                     viceCaptain = (random.nextInt() % 11 + 11) % 11;
                 }
 
