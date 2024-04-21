@@ -69,7 +69,7 @@ public class TeamGenerator {
         }
 
         MAX_CAPTAIN_COUNT = (Long) jsonObject.get("max_captain_count");
-        MAX_CAPTAIN_COUNT = (Long) jsonObject.get("max_vice_captain_count");
+        MAX_VICE_CAPTAIN_COUNT = (Long) jsonObject.get("max_vice_captain_count");
         MAX_TOTAL_COUNT_FOR_CAPTAIN_AND_VICE_CAPTAIN = (Long) jsonObject.get("max_total_count");
         TOTAL_TEAM_REQUIRED = (Long) jsonObject.get("total_teams_required");
 

@@ -7,7 +7,6 @@
     <list default="true" id="c8b29a13-8d28-4fb4-ab48-81345dc61dc8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/shuffler/TeamGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/shuffler/TeamGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/team_input.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/team_input.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +115,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/main/shuffler/TeamGenerator.java</url>
-          <line>205</line>
+          <line>202</line>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
       </breakpoints>
