@@ -27,6 +27,8 @@ public class TeamGenerator {
     public static Map<String, Integer> viceCaptainCount = new HashMap<>();
     public static Map<String, Integer> totalCount = new HashMap<>();
 
+    public static Set<String> captainVsViceCaptainComboAlreadyTaken = new HashSet<String>();
+
     public static Long MAX_CAPTAIN_COUNT = 2L;
     public static Long MAX_VICE_CAPTAIN_COUNT = 2L;
     public static Long MAX_TOTAL_COUNT_FOR_CAPTAIN_AND_VICE_CAPTAIN = 3L;
@@ -115,13 +117,14 @@ public class TeamGenerator {
         List<List<String>> teams = new ArrayList<>();
         List<String> players = readPlayers();
         long teamCount = TOTAL_TEAM_REQUIRED;
-        int maxTryCount = 10000005;
+        int maxTryCount = 20000010;
         List<List<String>> previousTeams = new ArrayList<>();
 
         while(prabhuKaNamLekarTeamBanRahaH-- >= 1 && maxTryCount > 0 ) {
             teams = new ArrayList<>();
             captainCount = new HashMap<>();
             viceCaptainCount = new HashMap<>();
+            captainVsViceCaptainComboAlreadyTaken = new HashSet<>();
             totalCount = new HashMap<>();
 
             // Maintain at least 13 players for 20 teams
@@ -165,6 +168,8 @@ public class TeamGenerator {
                     viceCaptain = (random.nextInt() % 11 + 11) % 11;
                 }
 
+                String encodedCaptainViceCaptain = encodeTeam(List.of(checker.get(captain), checker.get(viceCaptain)));
+
                 if (alreadyTakenTeam.contains(encodeTeam(checker)) ||
                         !atLeastOneKeeper ||
                         !atLeastOneBatter ||
@@ -173,7 +178,8 @@ public class TeamGenerator {
                         (captainCount.getOrDefault(checker.get(captain), 0) + 1 > MAX_CAPTAIN_COUNT) ||
                         (viceCaptainCount.getOrDefault(checker.get(viceCaptain), 0) + 1 > MAX_VICE_CAPTAIN_COUNT) ||
                         (totalCount.getOrDefault(checker.get(viceCaptain), 0) + 1 > MAX_TOTAL_COUNT_FOR_CAPTAIN_AND_VICE_CAPTAIN) ||
-                        (totalCount.getOrDefault(checker.get(captain), 0) + 1 > MAX_TOTAL_COUNT_FOR_CAPTAIN_AND_VICE_CAPTAIN)
+                        (totalCount.getOrDefault(checker.get(captain), 0) + 1 > MAX_TOTAL_COUNT_FOR_CAPTAIN_AND_VICE_CAPTAIN) ||
+                        captainVsViceCaptainComboAlreadyTaken.contains(encodedCaptainViceCaptain)
                 ) {
 //                    System.out.println("Already taken team........");
                     maxTryCount--;
@@ -188,7 +194,7 @@ public class TeamGenerator {
 
                 viceCaptainCount.put(checker.get(viceCaptain), viceCaptainCount.getOrDefault(checker.get(viceCaptain), 0) + 1);
                 totalCount.put(checker.get(viceCaptain), totalCount.getOrDefault(checker.get(viceCaptain), 0) + 1);
-
+                captainVsViceCaptainComboAlreadyTaken.add(encodedCaptainViceCaptain);
 
                 for (int j = 0; j < oneTeamSize; j++) {
                     String player = checker.get(j);
