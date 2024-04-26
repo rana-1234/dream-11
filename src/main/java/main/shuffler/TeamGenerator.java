@@ -14,6 +14,12 @@ import java.util.stream.Collectors;
 
 public class TeamGenerator {
 
+    public static class PlayerConfig{
+        Long maxCaptainCount;
+        Long maxViceCaptainCount;
+        Long maxOccurrenceCount;
+    }
+
     public static Random random = new Random();
 
     public static Set<String> keeperSet = new HashSet<String>();
@@ -26,6 +32,8 @@ public class TeamGenerator {
     public static Map<String, Integer> captainCount = new HashMap<>();
     public static Map<String, Integer> viceCaptainCount = new HashMap<>();
     public static Map<String, Integer> totalCount = new HashMap<>();
+
+    public static Map<String, PlayerConfig> playerConfig = new HashMap<>();
 
     public static Set<String> captainVsViceCaptainComboAlreadyTaken = new HashSet<String>();
 
@@ -107,17 +115,62 @@ public class TeamGenerator {
         bowlers.forEach(bowler -> players.add(bowler.toString()));
         bowlers.forEach(bowler -> bowlerSet.add(bowler.toString()));
 
+        JSONObject individualsPlayerConfig = (JSONObject) jsonObject.get("individual_player_config");
+
+        individualsPlayerConfig.forEach((playerName, config ) -> {
+            PlayerConfig config1 = new PlayerConfig();
+            JSONObject jsonObjectConfig = (JSONObject) config;
+
+            config1.maxCaptainCount = (Long) (jsonObjectConfig.get("max_captain_count") != null ? jsonObjectConfig.get("max_captain_count"):MAX_CAPTAIN_COUNT );
+            config1.maxViceCaptainCount = (Long) (jsonObjectConfig.get("max_vice_captain_count") != null ? jsonObjectConfig.get("max_vice_captain_count") : MAX_VICE_CAPTAIN_COUNT);
+            config1.maxOccurrenceCount = (Long) (jsonObjectConfig.get("max_occurrence_count") != null ? jsonObjectConfig.get("max_occurrence_count") : TOTAL_TEAM_REQUIRED);
+            playerConfig.put((String)playerName, config1);
+        });
+
+        for(String p: players){
+            if (!playerConfig.containsKey(p)){
+                PlayerConfig config = new PlayerConfig();
+                config.maxCaptainCount = MAX_CAPTAIN_COUNT;
+                config.maxViceCaptainCount = MAX_VICE_CAPTAIN_COUNT;
+                config.maxOccurrenceCount = TOTAL_TEAM_REQUIRED;
+                playerConfig.put(p, config);
+            }
+        }
         return players;
+    }
+
+    public static boolean violatingIndividualPlayerConfig(List<String> players, int captainIndex, int viceCaptainIndex, Map<String, Long> occurrence, Map<String, Long> captainOccurrence, Map<String, Long> viceCaptainOccurrence){
+        for(int i = 0 ; i < players.size() ; i++){
+            String player = players.get(i);
+            PlayerConfig config = playerConfig.get(player);
+            if (config.maxOccurrenceCount <= occurrence.getOrDefault(player, 0L)){
+                return true;
+            }
+            if ( i == captainIndex && config.maxCaptainCount <= captainOccurrence.getOrDefault(player, 0L)){
+                return true;
+            }
+            else if( i == viceCaptainIndex && config.maxViceCaptainCount <= viceCaptainOccurrence.getOrDefault(player, 0L)){
+                return true;
+            }
+        }
+        return false;
     }
 
 
     public static void main(String[] args) throws Exception {
 
+        // Must be read first.
         int prabhuKaNamLekarTeamBanRahaH = readComments();
+
         List<List<String>> teams = new ArrayList<>();
+
+        // Will read the players and its config
         List<String> players = readPlayers();
+
+        // TOTAL_TEAM_COUNT would be recalculated based on readComments.
         long teamCount = TOTAL_TEAM_REQUIRED;
-        int maxTryCount = 20000010;
+
+        int maxTryCount = 30000010;
         List<List<String>> previousTeams = new ArrayList<>();
 
         while(prabhuKaNamLekarTeamBanRahaH-- >= 1 && maxTryCount > 0 ) {
@@ -129,6 +182,11 @@ public class TeamGenerator {
 
             // Maintain at least 13 players for 20 teams
             Set<String> alreadyTakenTeam = new HashSet<>();
+            // Total occurrence of player in a team
+            Map<String, Long> occurrence = new HashMap<>();
+            Map<String, Long> captainOccurrence = new HashMap<>();
+            Map<String, Long> viceCaptainOccurrence = new HashMap<>();
+
             for (int i = 0; i < teamCount && maxTryCount > 0; i++) {
                 Collections.shuffle(players);
                 List<String> currentTeam = new ArrayList<>();
@@ -140,8 +198,14 @@ public class TeamGenerator {
                 boolean atLeastOneRounder = false;
                 boolean atLeastOneBowler = false;
 
-                for (int j = 0; j < oneTeamSize; j++) {
+                for (int j = 0; j < oneTeamSize && j < players.size(); j++) {
                     String player = players.get(j);
+
+                    // if player is already completed the maximum occurrence, remove those from getting selected
+                    if (occurrence.getOrDefault(player, 0L) >= playerConfig.get(player).maxOccurrenceCount){
+                        continue;
+                    }
+
                     if (keeperSet.contains(player)) {
                         atLeastOneKeeper = true;
                     }
@@ -156,6 +220,13 @@ public class TeamGenerator {
                         atLeastOneBowler = true;
                     }
                     checker.add(player);
+                }
+
+                if( checker.size() != oneTeamSize){
+                    // if not able to select players such a way that occurrence is the problem, then there is no
+                    // way to proceed and try
+                    maxTryCount--;
+                    break;
                 }
 
                 int captain = (random.nextInt() % 11 + 11) % 11;
@@ -179,9 +250,9 @@ public class TeamGenerator {
                         (viceCaptainCount.getOrDefault(checker.get(viceCaptain), 0) + 1 > MAX_VICE_CAPTAIN_COUNT) ||
                         (totalCount.getOrDefault(checker.get(viceCaptain), 0) + 1 > MAX_TOTAL_COUNT_FOR_CAPTAIN_AND_VICE_CAPTAIN) ||
                         (totalCount.getOrDefault(checker.get(captain), 0) + 1 > MAX_TOTAL_COUNT_FOR_CAPTAIN_AND_VICE_CAPTAIN) ||
-                        captainVsViceCaptainComboAlreadyTaken.contains(encodedCaptainViceCaptain)
+                        captainVsViceCaptainComboAlreadyTaken.contains(encodedCaptainViceCaptain) ||
+                        violatingIndividualPlayerConfig(checker, captain, viceCaptain, occurrence, captainOccurrence, viceCaptainOccurrence)
                 ) {
-//                    System.out.println("Already taken team........");
                     maxTryCount--;
                     i--;
                     continue;
@@ -195,9 +266,12 @@ public class TeamGenerator {
                 viceCaptainCount.put(checker.get(viceCaptain), viceCaptainCount.getOrDefault(checker.get(viceCaptain), 0) + 1);
                 totalCount.put(checker.get(viceCaptain), totalCount.getOrDefault(checker.get(viceCaptain), 0) + 1);
                 captainVsViceCaptainComboAlreadyTaken.add(encodedCaptainViceCaptain);
+                captainOccurrence.put(checker.get(captain), captainOccurrence.getOrDefault(checker.get(captain), 0L)+1);
+                viceCaptainOccurrence.put(checker.get(viceCaptain), viceCaptainOccurrence.getOrDefault(checker.get(viceCaptain), 0L)+1);
 
                 for (int j = 0; j < oneTeamSize; j++) {
                     String player = checker.get(j);
+                    occurrence.put(player, occurrence.getOrDefault(player, 0L) + 1);
                     if (j == captain) {
                         player = "C-" + player;
                     } else if (j == viceCaptain) {
@@ -205,7 +279,6 @@ public class TeamGenerator {
                     }
                     currentTeam.add(player);
                 }
-//                System.out.println("Generated now...");
                 teams.add(currentTeam);
             }
 

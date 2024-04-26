@@ -1,14 +1,21 @@
 {
-  "Comments": "keep fighting",
-  "keepers": ["S Samson","I Kishan","J Butler"],
-  "batters": ["S Yadav","Y Jaiswal", "T Verma", "R Sharma"],
-  "rounders":["R Ashwin", "H Pandya"],
-  "bowlers": ["A Khan", "A Madhwal", "K Sen", "J Bumrah", "Y Chahal", "T Bolt"],
-  "captains_not_from": ["Y Jaiswal","A Khan","R Ashwin", "K Sen","Y Chahal","T Bolt","H Pandya","T Verma", "A Madhwal"],
-  "vice_captains_not_from": ["A Khan","R Ashwin","H Pandya","T Verma", "A Madhwal","J Bumrah"],
+  "Comments": "being human",
+  "keepers": ["P Salt", "J Sharma"],
+  "batters": ["S Iyer", "A Sharma", "A Raghuvanshi"],
+  "rounders":["A Russel", "L Livingston", "S Narine", "S Curran"],
+  "bowlers": ["H Patel","M Starc", "K Rabada", "A Singh", "V Chakar","H Brar"],
+  "captains_not_from": ["P Salt","J Sharma","S Iyer","M Starc","V Chakar","A Raghuvanshi","A Sharma","L Livingston","A Singh","H Brar"],
+  "vice_captains_not_from": ["J Sharma","A Sharma","S Curran","H Patel","K Rabada"],
+  "individual_player_config": {
+    "V Chakar": {
+      "max_captain_count": 1,
+      "max_vice_captain_count": 2,
+      "max_occurrence_count": 10
+    }
+  },
   "max_captain_count": 4,
   "max_vice_captain_count":3,
-  "max_total_count": 5,
+  "max_total_count": 6,
   "total_teams_required": 20,
   "comment_dc": [],
   "comment_srh": []
