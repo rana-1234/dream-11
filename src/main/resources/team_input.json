@@ -1,12 +1,18 @@
 {
-  "Comments": "aaj main jitunga",
-  "keepers": ["I Kishan", "R Pant"],
-  "batters": ["R Sharma", "P Saw", "S Yadav", "T Stubs", "T Verma"],
-  "rounders":["H Pandya", "A Patel"],
-  "bowlers": ["A Nortje", "G Cotzee", "K Ahmed", "J Bumrah","K Yadav", "N Thusara", "M Kumar"],
-  "captains_not_from": ["N Thusara","A Nortje","K Ahmed", "M Kumar"],
-  "vice_captains_not_from": ["N Thusara", "K Ahmed"],
+  "Comments": "aaj main jitunga 2 crore",
+  "keepers": ["Q DeKock", "J Butler", "L Rahul", "S Samson", "N Pooran"],
+  "batters": ["Y Jaiswal", "R Powell"],
+  "rounders":["M Stonis", "R Ashwin", "K Pandya", "R Parag"],
+  "bowlers": ["A Khan RR", "M Khan", "S Sharma", "Y Thakur", "Y Chahal", "T Bolt"],
+  "captains_not_from": ["K Pandya", "R Parag","R Ashwin","A Khan RR", "M Khan"],
+  "vice_captains_not_from": [],
   "individual_player_config": {
+    "T Bolt": {
+      "max_occurrence_count": 9
+    },
+    "Y Chahal": {
+      "max_occurrence_count": 9
+    },
     "G Cotzee": {
       "max_captain_count": 1,
       "max_vice_captain_count": 1
