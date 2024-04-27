@@ -1,21 +1,32 @@
 {
-  "Comments": "being human",
-  "keepers": ["P Salt", "J Sharma"],
-  "batters": ["S Iyer", "A Sharma", "A Raghuvanshi"],
-  "rounders":["A Russel", "L Livingston", "S Narine", "S Curran"],
-  "bowlers": ["H Patel","M Starc", "K Rabada", "A Singh", "V Chakar","H Brar"],
-  "captains_not_from": ["P Salt","J Sharma","S Iyer","M Starc","V Chakar","A Raghuvanshi","A Sharma","L Livingston","A Singh","H Brar"],
-  "vice_captains_not_from": ["J Sharma","A Sharma","S Curran","H Patel","K Rabada"],
+  "Comments": "aaj main jitunga",
+  "keepers": ["I Kishan", "R Pant"],
+  "batters": ["R Sharma", "P Saw", "S Yadav", "T Stubs", "T Verma"],
+  "rounders":["H Pandya", "A Patel"],
+  "bowlers": ["A Nortje", "G Cotzee", "K Ahmed", "J Bumrah","K Yadav", "N Thusara", "M Kumar"],
+  "captains_not_from": ["N Thusara","A Nortje","K Ahmed", "M Kumar"],
+  "vice_captains_not_from": ["N Thusara", "K Ahmed"],
   "individual_player_config": {
-    "V Chakar": {
+    "G Cotzee": {
+      "max_captain_count": 1,
+      "max_vice_captain_count": 1
+    },
+    "A Nortje": {
+      "max_vice_captain_count": 1,
+      "max_occurrence_count": 10
+    },
+    "N Thusara": {
+      "max_occurrence_count": 8
+    },
+    "player1 Example": {
       "max_captain_count": 1,
       "max_vice_captain_count": 2,
       "max_occurrence_count": 10
     }
   },
-  "max_captain_count": 4,
-  "max_vice_captain_count":3,
-  "max_total_count": 6,
+  "max_captain_count": 2,
+  "max_vice_captain_count":2,
+  "max_total_count": 4,
   "total_teams_required": 20,
   "comment_dc": [],
   "comment_srh": []
