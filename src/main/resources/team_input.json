@@ -1,12 +1,24 @@
 {
-  "Comments": "aaj main jitunga 2 crore",
-  "keepers": ["Q DeKock", "J Butler", "L Rahul", "S Samson", "N Pooran"],
-  "batters": ["Y Jaiswal", "R Powell"],
-  "rounders":["M Stonis", "R Ashwin", "K Pandya", "R Parag"],
-  "bowlers": ["A Khan RR", "M Khan", "S Sharma", "Y Thakur", "Y Chahal", "T Bolt"],
-  "captains_not_from": ["K Pandya", "R Parag","R Ashwin","A Khan RR", "M Khan"],
-  "vice_captains_not_from": [],
+  "Comments": "aaj jitna h madarchod",
+  "keepers": ["M Dhoni", "H Klassen"],
+  "batters": ["A Sharma","S Dube", "T Head", "R Gaikwad"],
+  "rounders":["A Markram","M Ali", "K Nitesh Reddy" , "R Jadja" ],
+  "bowlers": ["B Kumar","M Pathirana", "P Cummins", "T Deshpande", "T Natrajan", "M Rahman"],
+  "captains_not_from": ["M Dhoni","A Markram","K Nitesh Reddy","B Kumar", "T Deshpande","M Rahman"],
+  "vice_captains_not_from": ["M Dhoni","K Nitesh Reddy"],
   "individual_player_config": {
+    "T Deshpande": {
+      "max_vice_captain_count": 1
+    },
+    "B Kumar": {
+      "max_vice_captain_count": 1
+    },
+    "T Natrajan": {
+      "max_vice_captain_count": 1
+    },
+    "M Rahman": {
+      "max_vice_captain_count": 1
+    },
     "T Bolt": {
       "max_occurrence_count": 9
     },
