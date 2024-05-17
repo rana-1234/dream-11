@@ -132,7 +132,7 @@ public class TeamGenerator {
                 PlayerConfig config = new PlayerConfig();
                 config.maxCaptainCount = MAX_CAPTAIN_COUNT;
                 config.maxViceCaptainCount = MAX_VICE_CAPTAIN_COUNT;
-                config.maxOccurrenceCount = TOTAL_TEAM_REQUIRED;
+                config.maxOccurrenceCount = MAX_OCCURRENCE_COUNT;
                 playerConfig.put(p, config);
             }
         }

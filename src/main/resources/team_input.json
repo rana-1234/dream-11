@@ -16,7 +16,7 @@
   "max_captain_count": 10,
   "max_vice_captain_count":10,
   "max_total_count": 30,
-  "max_occurrence_count": 30,
+  "max_occurrence_count": 60,
   "total_teams_required": 80,
   "comment_dc": [],
   "comment_srh": []
