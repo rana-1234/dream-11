@@ -39,7 +39,7 @@ public class TeamGenerator {
     public static Long MAX_CAPTAIN_COUNT = 2L;
     public static Long MAX_VICE_CAPTAIN_COUNT = 2L;
     public static Long MAX_TOTAL_COUNT_FOR_CAPTAIN_AND_VICE_CAPTAIN = 3L;
-
+    public static Long MAX_OCCURRENCE_COUNT = 5L;
     public static Long TOTAL_TEAM_REQUIRED = 20L;
 
     static void printAllContainers(){
@@ -81,6 +81,7 @@ public class TeamGenerator {
         MAX_VICE_CAPTAIN_COUNT = (Long) jsonObject.get("max_vice_captain_count");
         MAX_TOTAL_COUNT_FOR_CAPTAIN_AND_VICE_CAPTAIN = (Long) jsonObject.get("max_total_count");
         TOTAL_TEAM_REQUIRED = (Long) jsonObject.get("total_teams_required");
+        MAX_OCCURRENCE_COUNT = (Long) jsonObject.get("max_occurrence_count");
 
         JSONArray capNotFrom = (JSONArray)jsonObject.get("captains_not_from");
         capNotFrom.forEach(player -> captainsCantBeFrom.add(player.toString()));
@@ -122,7 +123,7 @@ public class TeamGenerator {
 
             config1.maxCaptainCount = (Long) (jsonObjectConfig.get("max_captain_count") != null ? jsonObjectConfig.get("max_captain_count"):MAX_CAPTAIN_COUNT );
             config1.maxViceCaptainCount = (Long) (jsonObjectConfig.get("max_vice_captain_count") != null ? jsonObjectConfig.get("max_vice_captain_count") : MAX_VICE_CAPTAIN_COUNT);
-            config1.maxOccurrenceCount = (Long) (jsonObjectConfig.get("max_occurrence_count") != null ? jsonObjectConfig.get("max_occurrence_count") : TOTAL_TEAM_REQUIRED);
+            config1.maxOccurrenceCount = (Long) (jsonObjectConfig.get("max_occurrence_count") != null ? jsonObjectConfig.get("max_occurrence_count") : MAX_OCCURRENCE_COUNT);
             playerConfig.put((String)playerName, config1);
         });
 

@@ -1,51 +1,23 @@
 {
-  "Comments": "aaj jitna h madarchod",
-  "keepers": ["M Dhoni", "H Klassen"],
-  "batters": ["A Sharma","S Dube", "T Head", "R Gaikwad"],
-  "rounders":["A Markram","M Ali", "K Nitesh Reddy" , "R Jadja" ],
-  "bowlers": ["B Kumar","M Pathirana", "P Cummins", "T Deshpande", "T Natrajan", "M Rahman"],
-  "captains_not_from": ["M Dhoni","A Markram","K Nitesh Reddy","B Kumar", "T Deshpande","M Rahman"],
-  "vice_captains_not_from": ["M Dhoni","K Nitesh Reddy"],
+  "Comments": "jhukega nahi sala",
+  "keepers": ["L Rahul", "I Kishan", "N Pooran", "Q DeKock"],
+  "batters": ["R Sharma", "S Yadav", "T Verma"],
+  "rounders":["K Pandya","M Stoinis", "H Pandya"],
+  "bowlers": ["A Khan", "A Kamboj", "N ul haq", "J Bumrah", "M Khan", "P Chawla"],
+  "captains_not_from": ["N Pooran","H Pandya","A Khan","N ul haq", "M Khan","A Kamboj","P Chawla","K Pandya"],
+  "vice_captains_not_from": [],
   "individual_player_config": {
-    "T Deshpande": {
-      "max_vice_captain_count": 1
-    },
-    "B Kumar": {
-      "max_vice_captain_count": 1
-    },
-    "T Natrajan": {
-      "max_vice_captain_count": 1
-    },
-    "M Rahman": {
-      "max_vice_captain_count": 1
-    },
-    "T Bolt": {
-      "max_occurrence_count": 9
-    },
-    "Y Chahal": {
-      "max_occurrence_count": 9
-    },
-    "G Cotzee": {
-      "max_captain_count": 1,
-      "max_vice_captain_count": 1
-    },
-    "A Nortje": {
-      "max_vice_captain_count": 1,
-      "max_occurrence_count": 10
-    },
-    "N Thusara": {
-      "max_occurrence_count": 8
-    },
     "player1 Example": {
       "max_captain_count": 1,
       "max_vice_captain_count": 2,
       "max_occurrence_count": 10
     }
   },
-  "max_captain_count": 2,
-  "max_vice_captain_count":2,
-  "max_total_count": 4,
-  "total_teams_required": 20,
+  "max_captain_count": 10,
+  "max_vice_captain_count":10,
+  "max_total_count": 30,
+  "max_occurrence_count": 30,
+  "total_teams_required": 80,
   "comment_dc": [],
   "comment_srh": []
 }
