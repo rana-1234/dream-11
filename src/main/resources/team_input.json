@@ -1,22 +1,26 @@
 {
-  "Comments": "jhukega nahi sala",
-  "keepers": ["L Rahul", "I Kishan", "N Pooran", "Q DeKock"],
-  "batters": ["R Sharma", "S Yadav", "T Verma"],
-  "rounders":["K Pandya","M Stoinis", "H Pandya"],
-  "bowlers": ["A Khan", "A Kamboj", "N ul haq", "J Bumrah", "M Khan", "P Chawla"],
-  "captains_not_from": ["N Pooran","H Pandya","A Khan","N ul haq", "M Khan","A Kamboj","P Chawla","K Pandya"],
-  "vice_captains_not_from": [],
+  "Comments": "love you mom",
+  "keepers": ["D Karthik"],
+  "batters": ["D Mitchell", "F du plessis", "R Gaikwad", "V Kohli", "S Dube"],
+  "rounders":["R Ravindra","C Green", "R Jadeja"],
+  "bowlers": ["K Sharma", "T Deshpande", "Y Dyal", "S Thakur", "M Siraj", "S Singh", "L Furgeson"],
+  "captains_not_from": ["D Mitchell","S Dube","D Karthik","T Deshpande", "S Thakur", "S Singh","Y Dyal","M Siraj","L Furgeson", "K Sharma"],
+  "vice_captains_not_from": ["D Karthik"],
   "individual_player_config": {
+    "D Karthik": {
+      "max_occurrence_count": 80
+    },
     "player1 Example": {
       "max_captain_count": 1,
       "max_vice_captain_count": 2,
       "max_occurrence_count": 10
     }
   },
-  "max_captain_count": 10,
-  "max_vice_captain_count":10,
-  "max_total_count": 30,
-  "max_occurrence_count": 60,
+  "max_captain_count": 14,
+  "max_vice_captain_count":17,
+  "max_total_count": 20,
+  "max_occurrence_count": 58,
+  "max_same_captain_vice_captain_occurrence_allowed" : 2,
   "total_teams_required": 80,
   "comment_dc": [],
   "comment_srh": []
