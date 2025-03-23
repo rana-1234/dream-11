@@ -1,27 +1,39 @@
 {
-  "Comments": "love you mom",
-  "keepers": ["D Karthik"],
-  "batters": ["D Mitchell", "F du plessis", "R Gaikwad", "V Kohli", "S Dube"],
-  "rounders":["R Ravindra","C Green", "R Jadeja"],
-  "bowlers": ["K Sharma", "T Deshpande", "Y Dyal", "S Thakur", "M Siraj", "S Singh", "L Furgeson"],
-  "captains_not_from": ["D Mitchell","S Dube","D Karthik","T Deshpande", "S Thakur", "S Singh","Y Dyal","M Siraj","L Furgeson", "K Sharma"],
-  "vice_captains_not_from": ["D Karthik"],
+  "Comments": "God is everywhere",
+  "keepers": ["MS Dhoni", "R Minz"],
+  "batters": ["R Ravindra", "R Sharma", "R Gaikwad", "S Yadav", "S Dube", "T Verma"],
+  "rounders":["W Jack","R Jadeja", "H Pandya", "S Curran", "M Santner" ],
+  "bowlers": ["A Kamboj", "J Bumrah", "D Chahar", "K Ahmed", "M Pathirana", "N Ellis", "N Ahmad" ],
+  "captains_not_from": ["S Dube", "K Ahmed", "A Kamboj", "N Ellis", "N Ahmed", "D Chahar"],
+  "vice_captains_not_from": [],
   "individual_player_config": {
-    "D Karthik": {
-      "max_occurrence_count": 80
-    },
-    "player1 Example": {
+    "A K N Reddy": {
       "max_captain_count": 1,
       "max_vice_captain_count": 2,
-      "max_occurrence_count": 10
+      "max_occurrence_count": 5
+    },
+    "A D Jurel": {
+      "max_captain_count": 1,
+      "max_vice_captain_count": 2,
+      "max_occurrence_count": 5
+    },
+    "A R Parag": {
+      "max_captain_count": 1,
+      "max_vice_captain_count": 2,
+      "max_occurrence_count": 5
+    },
+    "A S Sharma": {
+      "max_captain_count": 1,
+      "max_vice_captain_count": 2,
+      "max_occurrence_count": 7
     }
   },
-  "max_captain_count": 14,
-  "max_vice_captain_count":17,
-  "max_total_count": 20,
-  "max_occurrence_count": 58,
+  "max_captain_count": 4,
+  "max_vice_captain_count":12,
+  "max_total_count": 13,
+  "max_occurrence_count": 26,
   "max_same_captain_vice_captain_occurrence_allowed" : 2,
-  "total_teams_required": 80,
+  "total_teams_required": 40,
   "comment_dc": [],
   "comment_srh": []
 }

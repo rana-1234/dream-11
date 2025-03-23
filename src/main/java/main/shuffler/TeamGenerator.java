@@ -1,5 +1,6 @@
 package main.shuffler;
 
+import com.google.common.base.Function;
 import com.google.common.base.Strings;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -173,7 +174,7 @@ public class TeamGenerator {
         // TOTAL_TEAM_COUNT would be recalculated based on readComments.
         long teamCount = TOTAL_TEAM_REQUIRED;
 
-        int maxTryCount = 30000010;
+        int maxTryCount = 15_000_000;
         List<List<String>> previousTeams = new ArrayList<>();
 
         int teamCreated = 0;
@@ -307,8 +308,55 @@ public class TeamGenerator {
         }
     }
 
-    private static void showDreamTeam(List<List<String>> dtList) {
+    private static List<String> orderTeam(List<String> team){
+        List<String> result = new ArrayList<>();
 
+        Function<String, String> removeC_VC = (s) -> {
+            String t = s;
+            if ( s.startsWith("C-")){
+                t = s.substring(2);
+            }
+            else if ( s.startsWith("VC-")){
+                t = s.substring(3);
+            }
+            return t;
+        };
+        // collect keepers first
+        for (String s : team){
+            String t = removeC_VC.apply(s);
+            if ( keeperSet.contains(t)){
+                result.add(s);
+            }
+        }
+
+        // collect batters then
+        for (String s : team){
+            String t = removeC_VC.apply(s);
+            if ( batterSet.contains(t)){
+                result.add(s);
+            }
+        }
+
+        // collect all-rounders then
+        for (String s : team){
+            String t = removeC_VC.apply(s);
+            if ( rounderSet.contains(t)){
+                result.add(s);
+            }
+        }
+
+        // collect bowler then
+        for (String s : team){
+            String t = removeC_VC.apply(s);
+            if ( bowlerSet.contains(t)){
+                result.add(s);
+            }
+        }
+
+        return result;
+    }
+    private static void showDreamTeam(List<List<String>> dtList) {
+        dtList = dtList.stream().map(team -> orderTeam(team)).collect(Collectors.toList());
         List<List<String>> columnWiseTeam = new ArrayList<>();
         for ( int i = 1 ; i <= dtList.get(0).size() ; i++){
             columnWiseTeam.add(new ArrayList<>());
