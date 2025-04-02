@@ -1,39 +1,29 @@
 {
-  "Comments": "God is everywhere",
-  "keepers": ["MS Dhoni", "R Minz"],
-  "batters": ["R Ravindra", "R Sharma", "R Gaikwad", "S Yadav", "S Dube", "T Verma"],
-  "rounders":["W Jack","R Jadeja", "H Pandya", "S Curran", "M Santner" ],
-  "bowlers": ["A Kamboj", "J Bumrah", "D Chahar", "K Ahmed", "M Pathirana", "N Ellis", "N Ahmad" ],
-  "captains_not_from": ["S Dube", "K Ahmed", "A Kamboj", "N Ellis", "N Ahmed", "D Chahar"],
-  "vice_captains_not_from": [],
+  "Comments": "Hath BC",
+  "keepers": ["J Sharma", "J Buttler", "P Salt"],
+  "batters": ["R Patidar", "S Sudarshan", "V Kohli", "S Gill", "S Rutherford"],
+  "rounders": ["K Pandya", "S Khan"],
+  "bowlers": ["J Hazelwood", "M Siraj", "S Sharma", "R Kishor"],
+  "captains_not_from": ["J Sharma", "S Sharma", "K Pandya", "R Kishor", "S Rutherford", "M Siraj", "S Khan"],
+  "vice_captains_not_from": ["J Sharma", "S Sharma"],
   "individual_player_config": {
-    "A K N Reddy": {
-      "max_captain_count": 1,
-      "max_vice_captain_count": 2,
-      "max_occurrence_count": 5
+    "S Khan": {
+      "max_captain_count": 0,
+      "max_vice_captain_count": 1,
+      "max_occurrence_count": 10
     },
-    "A D Jurel": {
-      "max_captain_count": 1,
-      "max_vice_captain_count": 2,
-      "max_occurrence_count": 5
-    },
-    "A R Parag": {
-      "max_captain_count": 1,
-      "max_vice_captain_count": 2,
-      "max_occurrence_count": 5
-    },
-    "A S Sharma": {
-      "max_captain_count": 1,
-      "max_vice_captain_count": 2,
-      "max_occurrence_count": 7
+    "K Pandya": {
+      "max_captain_count": 0,
+      "max_vice_captain_count": 1,
+      "max_occurrence_count": 10
     }
   },
-  "max_captain_count": 4,
-  "max_vice_captain_count":12,
-  "max_total_count": 13,
-  "max_occurrence_count": 26,
-  "max_same_captain_vice_captain_occurrence_allowed" : 2,
-  "total_teams_required": 40,
+  "max_captain_count": 2,
+  "max_vice_captain_count":6,
+  "max_total_count": 7,
+  "max_occurrence_count": 10,
+  "max_same_captain_vice_captain_occurrence_allowed" : 1,
+  "total_teams_required": 12,
   "comment_dc": [],
   "comment_srh": []
 }
